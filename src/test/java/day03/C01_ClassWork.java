@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 
 public class C01_ClassWork {
     public static void main(String[] args) {
@@ -25,14 +27,24 @@ public class C01_ClassWork {
         aramaKutusu.sendKeys("city bike"+ Keys.ENTER);
 
         //Arama sonuç metnini yazdırın
-        WebElement aramaSonucu = driver.findElement(By.className("sg-col-inner"));
-        System.out.println("aramaSonucu = " + aramaSonucu.getText());
+        List<WebElement> aramaSonucu = driver.findElements(By.className("sg-col-inner"));
+        //Tüm "sg-col-inner" class name'i içeren web elementlerini bir List içerisine atıyoruz.
+        System.out.println("aramaSonucu = " + aramaSonucu.get(0).getText());//List içerisinden 1. elemanı alarak değerini yazdırıyoruz.
+        //Çünkü bizim yazdırmak istediğimiz web elementi bu listin 0. indeksinde.
+        //Arama sonuc metnimiz bu : 1-16 of 129 results for "city bike"
 
         //Sonuç sayısını yazdırın
-        String sonucSayisi = aramaSonucu.getText().split(" ")[2];
-        //Sonuc sayısını LAMBDA ile yazdırın
-        //Çıkan ilk sonucun resmine tıklayın.
-        //Sayfayı kapatın
+        String sonucSayisi = aramaSonucu.get(0).getText().split(" ")[2];
+        System.out.println("sonucSayisi = " + sonucSayisi);
 
+        //Sonuc sayısını LAMBDA ile yazdırın
+        Arrays.stream(aramaSonucu.get(0).getText().split(" ")).skip(2).limit(1).forEach(System.out::println);
+
+        //Çıkan ilk sonucun resmine tıklayın.
+        List<WebElement> urunResimleri = driver.findElements(By.className("s-image"));
+        urunResimleri.get(0).click();
+
+        //Sayfayı kapatın
+        driver.close();
     }
 }
