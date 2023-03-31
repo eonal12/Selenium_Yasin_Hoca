@@ -26,9 +26,9 @@ public class C02_Xpath {
         WebElement aramaKutusu = driver.findElement(By.id("twotabsearchtextbox"));
         aramaKutusu.sendKeys("city bike"+ Keys.ENTER);
 
-        driver.findElement(By.xpath("//span[.='Under $200']")).click();
+        driver.findElement(By.xpath("//span[.='Under $200']")).click();//atribute ismi yoksa nokta koyuyoruz.
 
-
+        driver.close();
 
 
 
