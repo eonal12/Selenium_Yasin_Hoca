@@ -36,6 +36,8 @@ public class C01_IFrame extends TestBase {
         textBox.sendKeys("Bu textbox iFrame içinde yer almaktadır");
 
         //   Sayfadaki "Elemental Selenium" yazısının görünür olduğunu doğrulayınız.
+        //Web elementimiz default page içerisinde yer aldığı için önce driver'ı iFrame dışına alalım
+        driver.switchTo().defaultContent();
         WebElement elementSelenium = driver.findElement(By.linkText("Elemental Selenium"));
         Assert.assertTrue(elementSelenium.isDisplayed());
     }
